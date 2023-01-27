@@ -6,6 +6,7 @@ import 'package:inearu/pages/chat.dart';
 import 'package:inearu/widgets/widgets.dart';
 
 class UserScreen extends StatelessWidget {
+  static const String routename = '/userscreen';
   const UserScreen({super.key});
 
   @override
@@ -43,25 +44,31 @@ class UserScreen extends StatelessWidget {
           } else if (state is SwipeLoaded) {
             return Column(
               children: [
-                Draggable(
-                  child: UserCard(user: state.users[0]),
-                  feedback: UserCard(user: state.users[0]),
-                  childWhenDragging: UserCard(user: state.users[1]),
-                  onDragEnd: (drag) {
-                    if (drag.velocity.pixelsPerSecond.dx < 0) {
-                      print('Swiped left');
-                      context.read<SwipeBloc>()
-                        ..add(
-                          SwipeLeft(user: state.users[0]),
-                        );
-                    } else {
-                      print('Swiped right');
-                      context.read<SwipeBloc>()
-                        ..add(
-                          SwipeRight(user: state.users[0]),
-                        );
-                    }
+                InkWell(
+                  onDoubleTap: () {
+                    Navigator.pushNamed(context, '/profile',
+                        arguments: state.users[0]);
                   },
+                  child: Draggable(
+                    child: UserCard(user: state.users[0]),
+                    feedback: UserCard(user: state.users[0]),
+                    childWhenDragging: UserCard(user: state.users[1]),
+                    onDragEnd: (drag) {
+                      if (drag.velocity.pixelsPerSecond.dx < 0) {
+                        print('Swiped left');
+                        context.read<SwipeBloc>()
+                          ..add(
+                            SwipeLeft(user: state.users[0]),
+                          );
+                      } else {
+                        print('Swiped right');
+                        context.read<SwipeBloc>()
+                          ..add(
+                            SwipeRight(user: state.users[0]),
+                          );
+                      }
+                    },
+                  ),
                 ),
                 Padding(
                   padding:
@@ -78,9 +85,6 @@ class UserScreen extends StatelessWidget {
                             );
                         },
                         child: ChoiceButton(
-                          height: 60,
-                          width: 60,
-                          size: 30,
                           hasGradient: false,
                           color: Colors.red,
                           icon: Icons.clear_outlined,
@@ -104,9 +108,6 @@ class UserScreen extends StatelessWidget {
                         ),
                       ),
                       ChoiceButton(
-                        height: 60,
-                        width: 60,
-                        size: 30,
                         hasGradient: false,
                         color: Colors.blue,
                         icon: Icons.info,

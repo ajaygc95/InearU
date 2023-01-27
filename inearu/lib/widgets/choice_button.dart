@@ -7,15 +7,15 @@ class ChoiceButton extends StatelessWidget {
   final IconData icon;
   final hasGradient;
   final double size;
-  
+
   const ChoiceButton({
     super.key,
-    required this.width,
-    required this.height,
+    this.width = 60,
+    this.height = 60,
     required this.color,
     required this.icon,
     required this.hasGradient,
-    required this.size,
+    this.size = 30,
   });
 
   @override
@@ -24,13 +24,11 @@ class ChoiceButton extends StatelessWidget {
       margin: EdgeInsets.only(top: 10),
       height: height,
       width: width,
-      // color: Colors.limeAccent,
-      // ignore: prefer_const_constructors
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.white,
         gradient: hasGradient
-            ? LinearGradient(colors: [Colors.red, Colors.pink])
+            ? LinearGradient(colors: [Color.fromARGB(255, 123, 52, 46), Color.fromARGB(255, 196, 35, 89)])
             : LinearGradient(colors: [Colors.white, Colors.white]),
         boxShadow: [
           BoxShadow(

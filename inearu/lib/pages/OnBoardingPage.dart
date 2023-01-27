@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  static const String routeName = '/onboardingscreen';
+class OnboardingScreenPage extends StatelessWidget {
+  static const String routename = '/onboardingscreen';
 
   final List<String> images = [
     'https://images.unsplash.com/photo-1663024718100-9250a83a1db5?ixlib=rb-1.2.1&ixid=Mn',

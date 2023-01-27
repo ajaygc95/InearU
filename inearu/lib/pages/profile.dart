@@ -6,14 +6,10 @@ import 'package:inearu/widgets/choice_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String routename = '/profile';
-
-  ProfileScreen({
-    super.key,
-  });
-
+  const ProfileScreen({super.key, required this.user});
+  final User user;
   @override
   Widget build(BuildContext context) {
-    final User user = User.users[0];
     double height = MediaQuery.of(context).size.height / 2;
     return Scaffold(
       appBar: AppBar(
@@ -29,12 +25,16 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 40),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: NetworkImage(User.users[0].imageUrls[0]),
-                        fit: BoxFit.cover,
+                  child: Hero(
+                    tag: 'user_image',
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.grey,
+                        image: DecorationImage(
+                          image: NetworkImage(user.imageUrls[0]),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -47,9 +47,6 @@ class ProfileScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ChoiceButton(
-                          height: 60,
-                          width: 60,
-                          size: 30,
                           hasGradient: false,
                           color: Colors.red,
                           icon: Icons.clear_outlined,
@@ -57,17 +54,14 @@ class ProfileScreen extends StatelessWidget {
                         ChoiceButton(
                           height: 80,
                           width: 80,
-                          size: 30,
+                          size: 35,
                           hasGradient: true,
                           color: Colors.white,
                           icon: Icons.favorite,
                         ),
                         ChoiceButton(
-                          height: 60,
-                          width: 60,
-                          size: 30,
                           hasGradient: false,
-                          color: Colors.red,
+                          color: Colors.blue.shade300,
                           icon: Icons.info,
                         ),
                       ],
@@ -103,6 +97,40 @@ class ProfileScreen extends StatelessWidget {
                       .headline5!
                       .copyWith(fontWeight: FontWeight.normal, height: 2),
                 ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text('Interests', style: Theme.of(context).textTheme.headline3),
+                Wrap(
+                  spacing: 8.0, // gap between adjacent chips
+                  runSpacing: 4.0, // gap between lines
+                  children: <Widget>[
+                    Chip(
+                      avatar: CircleAvatar(
+                          backgroundColor: Colors.blue.shade900,
+                          child: Text('AH')),
+                      label: Text('Hamilton'),
+                    ),
+                    Chip(
+                      avatar: CircleAvatar(
+                          backgroundColor: Colors.blue.shade900,
+                          child: Text('ML')),
+                      label: Text('Lafayette'),
+                    ),
+                    Chip(
+                      avatar: CircleAvatar(
+                          backgroundColor: Colors.blue.shade900,
+                          child: Text('HM')),
+                      label: Text('Mulligan'),
+                    ),
+                    Chip(
+                      avatar: CircleAvatar(
+                          backgroundColor: Colors.blue.shade900,
+                          child: Text('JL')),
+                      label: Text('Laurens'),
+                    ),
+                  ],
+                )
               ],
             ),
           )
