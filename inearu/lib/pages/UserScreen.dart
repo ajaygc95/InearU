@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inearu/bloc/swipe_bloc.dart';
 import 'package:inearu/models/models.dart';
-import 'package:inearu/pages/chat.dart';
+import 'package:inearu/pages/chat_page.dart';
+import 'package:inearu/pages/matches_screen.dart';
 import 'package:inearu/widgets/widgets.dart';
 
 class UserScreen extends StatelessWidget {
@@ -17,15 +18,14 @@ class UserScreen extends StatelessWidget {
         elevation: 0,
         title: Row(
           children: [
-            Text('${User.users.length} total objects',
-                style: Theme.of(context).textTheme.headline2),
+            Text('SpotMate', style: Theme.of(context).textTheme.headline2),
           ],
         ),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Chat()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MatchesScreen()));
             },
             icon: Icon(
               Icons.send,

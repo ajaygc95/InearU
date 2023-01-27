@@ -7,6 +7,7 @@ import 'package:inearu/config/custom_theme.dart';
 import 'package:inearu/pages/OnBoardingPage.dart';
 import 'package:inearu/pages/UserScreen.dart';
 import 'package:inearu/bloc/swipe_bloc.dart';
+import 'package:inearu/pages/matches_screen.dart';
 import 'package:inearu/pages/onboarding_screen.dart';
 import 'package:inearu/pages/profile.dart';
 import 'models/models.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: theme(),
         onGenerateRoute: RouteGenerator.generateRoute,
-        initialRoute: UserScreen.routename,
+        initialRoute: MatchesScreen.routename,
       ),
     );
   }

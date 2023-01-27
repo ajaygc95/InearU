@@ -4,6 +4,8 @@ import 'package:inearu/LoadingScreen.dart';
 import 'package:inearu/models/models.dart';
 import 'package:inearu/pages/OnBoardingPage.dart';
 import 'package:inearu/pages/UserScreen.dart';
+import 'package:inearu/pages/chat_screen.dart';
+import 'package:inearu/pages/matches_screen.dart';
 import 'package:inearu/pages/onboarding_screen.dart';
 import 'package:inearu/pages/profile.dart';
 
@@ -25,6 +27,15 @@ class RouteGenerator {
       case OnboardingScreen.routename:
         return MaterialPageRoute(
           builder: (context) => OnboardingScreen(),
+        );
+      case MatchesScreen.routename:
+        return MaterialPageRoute(
+          builder: (context) => MatchesScreen(),
+        );
+      case ChatScreen.routename:
+        return MaterialPageRoute(
+          builder: (context) =>
+              ChatScreen(userMatch: settings.arguments as UserMatch),
         );
       default:
         return _errorRoute();
