@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:inearu/models/models.dart';
+import 'package:inearu/widgets/custom_bar.dart';
 import 'package:inearu/widgets/user_small_card.dart';
 
 class MatchesScreen extends StatelessWidget {
@@ -18,12 +19,10 @@ class MatchesScreen extends StatelessWidget {
         .toList();
 
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
+        appBar: CustomAppBar(title: "Matches"),
         body: SingleChildScrollView(
-          child: Padding(
+          child: Container(
+            margin: EdgeInsets.only(top: 20),
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,6 +69,9 @@ class MatchesScreen extends StatelessWidget {
                 Text(
                   "Your Chats",
                   style: Theme.of(context).textTheme.headline4,
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 ListView.builder(
                   itemCount: activeMatches.length,

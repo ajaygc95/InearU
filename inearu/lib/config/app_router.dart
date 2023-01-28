@@ -7,7 +7,8 @@ import 'package:inearu/pages/UserScreen.dart';
 import 'package:inearu/pages/chat_screen.dart';
 import 'package:inearu/pages/matches_screen.dart';
 import 'package:inearu/pages/onboarding_screen.dart';
-import 'package:inearu/pages/profile.dart';
+import 'package:inearu/pages/user_detail_screen.dart';
+import 'package:inearu/screen/profile_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -16,9 +17,14 @@ class RouteGenerator {
       //   return MaterialPageRoute(
       //     builder: (context) => OnboardingScreen(),
       //   );
-      case "/profile":
+      case ProfileScreen.routename:
         return MaterialPageRoute(
-          builder: (context) => ProfileScreen(user: settings.arguments as User),
+          builder: (context) => ProfileScreen(),
+        );
+      case UserDetailScreen.routename:
+        return MaterialPageRoute(
+          builder: (context) =>
+              UserDetailScreen(user: settings.arguments as User),
         );
       case UserScreen.routename:
         return MaterialPageRoute(

@@ -16,39 +16,32 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
+      iconTheme: IconThemeData(color: Color.fromARGB(255, 62, 18, 18)),
       elevation: 0,
-      title: Row(children: [
-        Expanded(
-          child: Container(
-            child: SvgPicture.asset(
-              'assets/Youtube.svg',
-              height: 50,
-              color: Color.fromARGB(255, 25, 202, 149),
+      title: Align(
+        child: Container(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        // Expanded(
-        //     flex: 2,
-        //     child: Text(
-        //       title,
-        //       style: TextStyle(
-        //         fontSize: 32,
-        //         color: Colors.blueGrey,
-        //       ),
-        //     )),
-      ]),
+      ),
       actions: hasActions
           ? [
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 child: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/matchescreen');
+                      Navigator.pushNamed(context, '/chatscreen');
                     },
                     icon: Icon(
                       Icons.send_rounded,
                       color: Colors.blueGrey,
-                      size: 40,
+                      size: 30,
                     )),
               ),
             ]

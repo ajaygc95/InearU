@@ -15,6 +15,7 @@ class UserScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Color.fromARGB(255, 62, 18, 18)),
         elevation: 0,
         title: Row(
           children: [

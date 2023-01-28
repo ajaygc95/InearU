@@ -4,9 +4,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:inearu/models/models.dart';
 import 'package:inearu/widgets/choice_button.dart';
 
-class ProfileScreen extends StatelessWidget {
-  static const String routename = '/profile';
-  const ProfileScreen({super.key, required this.user});
+class UserDetailScreen extends StatelessWidget {
+  static const String routename = '/userscreen';
+  const UserDetailScreen({super.key, required this.user});
   final User user;
   @override
   Widget build(BuildContext context) {
