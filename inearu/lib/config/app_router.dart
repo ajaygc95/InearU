@@ -4,6 +4,7 @@ import 'package:inearu/LoadingScreen.dart';
 import 'package:inearu/models/models.dart';
 import 'package:inearu/pages/OnBoardingPage.dart';
 import 'package:inearu/pages/UserScreen.dart';
+import 'package:inearu/pages/api_profile_screen.dart';
 import 'package:inearu/pages/chat_screen.dart';
 import 'package:inearu/pages/matches_screen.dart';
 import 'package:inearu/pages/onboarding_screen.dart';
@@ -42,6 +43,10 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) =>
               ChatScreen(userMatch: settings.arguments as UserMatch),
+        );
+      case ApiProfileScreen.routename:
+        return MaterialPageRoute(
+          builder: (context) => ApiProfileScreen(),
         );
       default:
         return _errorRoute();

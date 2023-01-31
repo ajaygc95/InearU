@@ -66,7 +66,7 @@ class User {
     User(
         name: 'Suraj Gurung',
         id: 4,
-        firstName: 'Papita',
+        firstName: 'Suraj',
         lastName: 'Gurung',
         age: 25,
         imageUrls: [
