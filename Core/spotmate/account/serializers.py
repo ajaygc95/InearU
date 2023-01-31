@@ -25,10 +25,29 @@ class InterestSerializer(serializers.ModelSerializer):
         fields = ('id', 'interest')
 
 class ProfileSerializer(serializers.ModelSerializer):
-    images = ImageSerializer(many=True)
+    images = ImageSerializer(required=False, many=True,)
+
     class Meta:
         model = Profile
         fields = ['id', 'user', 'first_name', 'last_name', 'job_title', 'bio', 'images', 'interests']
+
+    def validate(self, data):
+        images = data.get('images', [])
+        for image in images:
+            image = image.get('image')
+            if not image.format.lower() in ['jpeg', 'png', 'jpg']:
+                raise serializers.ValidationError({'image': ['Upload a valid image. The file you uploaded was either not an image or a corrupted image.']})
+
+        # Check the number of images for the current profile
+        profile = self.instance
+        if profile:
+            images = profile.images.all()
+            if len(images) + len(data.get('images', [])) > 8:
+                raise serializers.ValidationError({'images': ['Profile can have maximum 8 images.']})
+
+        return data
+
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)

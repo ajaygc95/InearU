@@ -1,14 +1,17 @@
 from rest_framework import generics, permissions
 from .serializers import ( UserSerializer, 
                           RegisterSerializer, 
+                          ImageSerializer,
                           LoginSerializer, 
                           MyTokenObtainPairSerializer,
                           ProfileSerializer
                           )
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.contrib.auth.models import User
 from .models import Profile, Image, Interest
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -61,7 +64,18 @@ class ProfileRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     def perform_update(self, serializer):
         if self.get_object().user != self.request.user:
             raise PermissionDenied("You cannot update this profile.")
+            
+        images = self.request.FILES.getlist('images', [])
+        for image in images:
+            image_serializer = ImageSerializer(data={'image': image})
+            if image_serializer.is_valid():
+                image_instance = image_serializer.save()
+                self.get_object().images.add(image_instance)
+            else:
+                raise ValidationError(image_serializer.errors)
+            
         return super().perform_update(serializer)
+
 
     def perform_destroy(self, instance):
         if instance.user != self.request.user:
