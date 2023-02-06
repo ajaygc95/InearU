@@ -2,14 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inearu/LoadingScreen.dart';
 import 'package:inearu/models/models.dart';
+import 'package:inearu/models/profile_model.dart';
 import 'package:inearu/pages/OnBoardingPage.dart';
 import 'package:inearu/pages/UserScreen.dart';
 import 'package:inearu/pages/api_profile_screen.dart';
+import 'package:inearu/pages/chat_page.dart';
 import 'package:inearu/pages/chat_screen.dart';
 import 'package:inearu/pages/matches_screen.dart';
 import 'package:inearu/pages/onboarding_screen.dart';
 import 'package:inearu/pages/user_detail_screen.dart';
 import 'package:inearu/screen/profile_screen.dart';
+import 'package:inearu/screen/login_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -31,6 +34,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => UserScreen(),
         );
+      case LoginScreen.routename:
+        return MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        );
+      case ChatPage.routename:
+        return MaterialPageRoute(
+          builder: (context) => ChatPage(),
+        );
       case OnboardingScreen.routename:
         return MaterialPageRoute(
           builder: (context) => OnboardingScreen(),
@@ -46,7 +57,8 @@ class RouteGenerator {
         );
       case ApiProfileScreen.routename:
         return MaterialPageRoute(
-          builder: (context) => ApiProfileScreen(),
+          builder: (context) =>
+              ApiProfileScreen(token: settings.arguments as String),
         );
       default:
         return _errorRoute();

@@ -10,6 +10,11 @@ import 'package:inearu/widgets/widgets.dart';
 
 class ApiProfileScreen extends StatefulWidget {
   static const String routename = '/apiprofileScreen';
+
+  final String token;
+
+  const ApiProfileScreen({super.key, required this.token});
+
   @override
   _ApiProfileScreenState createState() => _ApiProfileScreenState();
 }
@@ -18,11 +23,14 @@ class _ApiProfileScreenState extends State<ApiProfileScreen> {
   var _profile = {};
   bool _isLoading = true;
   List<dynamic> imageUrls = [];
-  var _token = "token here";
+  var _token;
 
   @override
   initState() {
     super.initState();
+
+    print("COMMMMMMMMMMM");
+    _token = widget.token;
     _fetchProfile();
   }
 
@@ -30,6 +38,7 @@ class _ApiProfileScreenState extends State<ApiProfileScreen> {
     setState(() {
       _isLoading = true;
     });
+
     var response = await http
         .get(Uri.parse(api), headers: {"Authorization": "Bearer " + _token});
     var jsonData = json.decode(response.body);
@@ -41,46 +50,6 @@ class _ApiProfileScreenState extends State<ApiProfileScreen> {
       print("[INFO] this is first iamge URLS: ${imageUrls[0]['image']}");
     });
   }
-
-  // _fetchProfile() async {
-  //   try {
-  //     print("Downloading profile data");
-  //     _profile = await http
-  //         .get(Uri.parse(api))
-  //         .then((response) => json.decode(response.body));
-
-  //     List<dynamic> imagesIds = _profile[0]['images'];
-  //     imageUrls = await fetchImageUrlsSync(imagesIds);
-  //     print("this is imageUrls: ${imageUrls[0]['image']}");
-
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   } catch (e) {
-  //     print("There is some error $e");
-  //   }
-  // }
-
-  // Future<List<Map<String, dynamic>>> fetchImageUrlsSync(
-  //     List<dynamic> imageIds) async {
-  //   print("formatedList called with $imageIds");
-  //   var url = "http://10.0.2.2:8000/image/";
-
-  //   List<Map<String, dynamic>> finalListOfImages = [];
-
-  //   for (var id in imageIds) {
-  //     var response = await http.get(Uri.parse(url + id.toString()));
-  //     if (response.statusCode == 200) {
-  //       var data = json.decode(response.body);
-  //       print(data.runtimeType);
-  //       finalListOfImages.add(data);
-  //     } else {
-  //       print("status code: 404");
-  //     }
-  //   }
-
-  //   return finalListOfImages;
-  // }
 
   @override
   Widget build(BuildContext context) {

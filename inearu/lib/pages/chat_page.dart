@@ -1,38 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:inearu/bloc/profile/profile_bloc.dart';
+import 'package:inearu/cubit/cubit/counter_cubit.dart';
+import 'package:inearu/models/profile_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
+  static const String routename = '/randomtest';
   const ChatPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Draggable(
-          feedback: Squarewidget(text: "Dragged", color: Colors.red),
-          child: Squarewidget(text: "Drag Me", color: Colors.yellow),
-          childWhenDragging: Squarewidget(text: "", color: Colors.transparent),
-        ),
-      ),
-    );
-  }
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class Squarewidget extends StatelessWidget {
-  final Color color;
-  final String text;
-  Squarewidget({super.key, required this.color, required this.text});
-
+class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 200,
-      color: color,
-      child: Center(
-          child: Text(
-        '$text',
-        style: TextStyle(fontSize: 30, color: Colors.purple),
-      )),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.amber),
+      ),
+      body: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          if (state is ProfileLoading) {
+            return const CircularProgressIndicator();
+          }
+          if (state is ProfileLoaded) {
+            return Container(
+              child: ListView.builder(
+                  itemCount: state.profiles.length,
+                  shrinkWrap: true,
+                  itemBuilder: ((context, index) {
+                    return Text(
+                      state.profiles[index].firstName,
+                      style: TextStyle(color: Colors.amberAccent, fontSize: 30),
+                    );
+                  })),
+            );
+          } else {
+            return const Text("Something went wrong");
+          }
+        },
+      ),
     );
   }
 }
