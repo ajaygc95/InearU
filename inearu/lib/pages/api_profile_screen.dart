@@ -28,8 +28,6 @@ class _ApiProfileScreenState extends State<ApiProfileScreen> {
   @override
   initState() {
     super.initState();
-
-    print("COMMMMMMMMMMM");
     _token = widget.token;
     _fetchProfile();
   }

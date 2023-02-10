@@ -6,6 +6,7 @@ import 'package:inearu/models/profile_model.dart';
 import 'package:inearu/pages/OnBoardingPage.dart';
 import 'package:inearu/pages/UserScreen.dart';
 import 'package:inearu/pages/api_profile_screen.dart';
+import 'package:inearu/pages/bloc_counter.dart';
 import 'package:inearu/pages/chat_page.dart';
 import 'package:inearu/pages/chat_screen.dart';
 import 'package:inearu/pages/matches_screen.dart';
@@ -13,6 +14,7 @@ import 'package:inearu/pages/onboarding_screen.dart';
 import 'package:inearu/pages/user_detail_screen.dart';
 import 'package:inearu/screen/profile_screen.dart';
 import 'package:inearu/screen/login_screen.dart';
+import 'package:inearu/test_pages/stream_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -38,13 +40,21 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => LoginScreen(),
         );
-      case ChatPage.routename:
-        return MaterialPageRoute(
-          builder: (context) => ChatPage(),
-        );
+      // case ChatPage.routename:
+      //   return MaterialPageRoute(
+      //     builder: (context) => ChatPage(),
+      //   );
       case OnboardingScreen.routename:
         return MaterialPageRoute(
           builder: (context) => OnboardingScreen(),
+        );
+      case StreamScreen.routename:
+        return MaterialPageRoute(
+          builder: (context) => StreamScreen(),
+        );
+      case CounterScreen.routename:
+        return MaterialPageRoute(
+          builder: (context) => CounterScreen(),
         );
       case MatchesScreen.routename:
         return MaterialPageRoute(

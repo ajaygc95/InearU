@@ -1,4 +1,4 @@
-class ProfileModel {
+class Profile {
   int id;
   int user;
   String firstName;
@@ -8,7 +8,7 @@ class ProfileModel {
   List<String> imageUrls;
   List interests;
 
-  ProfileModel({
+  Profile({
     required this.id,
     required this.user,
     required this.firstName,
@@ -19,9 +19,9 @@ class ProfileModel {
     required this.interests,
   });
 
-  List<ProfileModel> profiles = [];
+  List<Profile> profiles = [];
 
-  ProfileModel copyWith({
+  Profile copyWith({
     required int id,
     required int user,
     required String firstName,
@@ -31,7 +31,7 @@ class ProfileModel {
     required List<String> imageUrls,
     required List interests,
   }) {
-    return ProfileModel(
+    return Profile(
       id: id,
       user: user,
       firstName: firstName,

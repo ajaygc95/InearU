@@ -12,7 +12,7 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('users/', UserListView.as_view(), name='user-list'),
     path('profiles/', ProfileListView.as_view(), name='user-list'),
-     path('profile/', ProfileRetrieveUpdateDeleteView.as_view(), name='current-profile'),
+    path('profile/', ProfileRetrieveUpdateDeleteView.as_view(), name='current-profile'),
     path('profiles/<int:pk>/', ProfileRetrieveUpdateDeleteView.as_view(), name='profile-detail'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

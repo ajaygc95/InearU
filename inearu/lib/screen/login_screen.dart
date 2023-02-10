@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, '/userscreen');
+                    Navigator.pushNamed(context, '/onboardingscreen');
                   },
                   child: Text(
                     "Forgot Password?",
@@ -85,10 +85,15 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Not a member? "),
-                Text(
-                  "Register Now",
-                  style: TextStyle(
-                      color: Colors.blue, fontWeight: FontWeight.bold),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/onboardingscreen');
+                  },
+                  child: Text(
+                    "Register Now",
+                    style: TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.bold),
+                  ),
                 )
               ],
             ),

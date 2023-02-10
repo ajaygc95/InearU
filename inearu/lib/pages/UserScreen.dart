@@ -7,7 +7,7 @@ import 'package:inearu/pages/matches_screen.dart';
 import 'package:inearu/widgets/widgets.dart';
 
 class UserScreen extends StatelessWidget {
-  static const String routename = '/userscreen';
+  static const String routename = '/UserS';
   const UserScreen({super.key});
 
   @override
