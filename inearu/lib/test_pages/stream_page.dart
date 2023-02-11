@@ -1,89 +1,122 @@
-import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:inearu/bloc/counter/counter_bloc.dart';
+import 'package:inearu/bloc/counter/counter_event.dart';
+import 'package:inearu/bloc/counter/counter_state.dart';
 
-class StreamScreen extends StatefulWidget {
+class StreamScreen extends StatelessWidget {
   static const String routename = '/streamscreen';
-
   const StreamScreen({super.key});
-
-  @override
-  State<StreamScreen> createState() => _StreamScreenState();
-}
-
-class _StreamScreenState extends State<StreamScreen> {
-  // final StreamController streamController = StreamController();
-
-  // _addData() async {
-  //   for (int i = 0; i <= 10; i++) {
-  //     await Future.delayed(Duration(seconds: 1));
-  //     streamController.sink.add(i);
-  //   }
-  // }
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   _addData();
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade400,
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              StreamBuilder(
-                stream: streamData(20),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Text("There is some error");
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  } else {
-                    return Text(
-                      "${snapshot.data}",
-                      style: TextStyle(fontSize: 50),
-                    );
-                  }
-                },
-              ),
-              FutureBuilder<int>(
-                future: sumStream(streamData(10)),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Text('Sum: ${snapshot.data}');
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  }
-                  return CircularProgressIndicator();
-                },
-              )
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlocBuilder<CounterBloc, CounterState>(
+              builder: (context, state) {
+                if (state is InitialCounterState) {
+                  return _counterText(value: "0");
+                } else if (state is UpdateCounter) {
+                  return _counterText(value: "${state.counter}");
+                } else {
+                  return _counterText(value: "There is something wrong");
+                }
+              },
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  onPressed: () {
+                    BlocProvider.of<CounterBloc>(context)
+                        .add(NumberDecreaseEvent());
+                  },
+                  child: Icon(
+                    Icons.remove,
+                  ),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    BlocProvider.of<CounterBloc>(context)
+                        .add(NumberIncreaseEvent());
+                  },
+                  child: Icon(Icons.add),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 
+  Center _streambuilder() {
+    return Center(
+      child: StreamBuilder(
+        stream: streamData(5),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Text(
+              " Hello ${snapshot.data}",
+              style: TextStyle(fontSize: 50),
+            );
+          } else {
+            return CircularProgressIndicator();
+          }
+        },
+      ),
+    );
+  }
+
   Stream<int> streamData(int n) async* {
-    for (int i = 0; i < n; i++) {
-      await Future.delayed(Duration(seconds: 1));
+    for (int i = 0; i <= n; i++) {
+      await Future.delayed(Duration(milliseconds: 200));
       yield i;
     }
   }
+}
 
-  Future<int> sumStream(Stream<int> stream) async {
-    int sum = 0;
-    await for (int value in stream) {
-      sum += value;
-    }
-    return sum;
+class _counterText extends StatelessWidget {
+  final String value;
+  const _counterText({
+    Key? key,
+    required this.value,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      width: 80,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(80),
+        gradient: LinearGradient(
+          colors: [
+            Colors.white,
+            Colors.red,
+            Colors.amber,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Center(
+        child: Text(
+          value,
+          style: TextStyle(fontSize: 40, color: Color.fromARGB(255, 237, 234, 234)),
+        ),
+      ),
+    );
   }
 }

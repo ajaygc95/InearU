@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:inearu/bloc/counter/counter_event.dart';
@@ -18,7 +20,9 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
 
   void onNumberDecrease(
       NumberDecreaseEvent event, Emitter<CounterState> emit) async {
-    counter = counter - 1;
-    emit((UpdateCounter(counter)));
+    if (counter > 0) {
+      counter = counter - 1;
+      emit((UpdateCounter(counter)));
+    }
   }
 }

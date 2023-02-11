@@ -4,6 +4,7 @@ import 'package:inearu/bloc/counter/counter_bloc.dart';
 import 'package:inearu/bloc/login/login_bloc.dart';
 import 'package:inearu/config/app_router.dart';
 import 'package:inearu/config/custom_theme.dart';
+import 'package:inearu/cubit/cubit/counter_cubit.dart';
 import 'package:inearu/models/profile_model.dart';
 
 import 'package:inearu/bloc/swipe_bloc.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => CounterBloc()),
+        BlocProvider(create: (_) => CounterCubitBloc(0)),
         BlocProvider(
             create: (_) => SwipeBloc()..add(LoadUsers(users: User.users))),
         BlocProvider(create: (context) => LoginBloc()),
