@@ -1,9 +1,11 @@
+import 'package:inearu/models/test_profile.dart';
+
 class CounterState {}
 
 class InitialCounterState extends CounterState {}
 
 class UpdateCounter extends CounterState {
-  final int counter;
+  final TestProfile profile;
 
-  UpdateCounter(this.counter);
+  UpdateCounter({required this.profile});
 }

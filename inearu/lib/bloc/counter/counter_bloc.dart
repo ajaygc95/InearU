@@ -4,25 +4,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:inearu/bloc/counter/counter_event.dart';
 import 'package:inearu/bloc/counter/counter_state.dart';
+import 'package:inearu/models/test_profile.dart';
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  int counter = 0;
+  TestProfile profile = TestProfile(name: "", age: 1);
   CounterBloc() : super(InitialCounterState()) {
     on<NumberIncreaseEvent>(onNumberIncrease);
-    on<NumberDecreaseEvent>(onNumberDecrease);
+    on<NumberDecreaseEvent>(onAddAge);
   }
 
   void onNumberIncrease(
       NumberIncreaseEvent event, Emitter<CounterState> emit) async {
-    counter = counter + 1;
-    emit((UpdateCounter(counter)));
+    profile.name = "Ajay";
+    emit((UpdateCounter(profile: profile)));
   }
 
-  void onNumberDecrease(
-      NumberDecreaseEvent event, Emitter<CounterState> emit) async {
-    if (counter > 0) {
-      counter = counter - 1;
-      emit((UpdateCounter(counter)));
-    }
+  void onAddAge(NumberDecreaseEvent event, Emitter<CounterState> emit) async {
+    profile.age = 27;
+    emit((UpdateCounter(profile: profile)));
   }
 }

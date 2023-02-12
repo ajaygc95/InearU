@@ -20,7 +20,7 @@ class CounterScreen extends StatelessWidget {
                     onTap: () => BlocProvider.of<CounterBloc>(context)
                         .add(NumberDecreaseEvent()),
                     child: CircleAvatar(child: Icon(Icons.remove))),
-                Text(state is UpdateCounter ? "${state.counter}" : "0"),
+                // Text(state is UpdateCounter ? "${state.counter}" : "0"),
                 InkWell(
                     onTap: () => BlocProvider.of<CounterBloc>(context)
                         .add(NumberIncreaseEvent()),

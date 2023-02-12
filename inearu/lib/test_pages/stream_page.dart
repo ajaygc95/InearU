@@ -26,7 +26,12 @@ class StreamScreen extends StatelessWidget {
                 if (state is InitialCounterState) {
                   return _counterText(value: "0");
                 } else if (state is UpdateCounter) {
-                  return _counterText(value: "${state.counter}");
+                  return Row(
+                    children: [
+                      _counterText(value: "${state.profile.name}"),
+                      _counterText(value: "${state.profile.age}"),
+                    ],
+                  );
                 } else {
                   return _counterText(value: "There is something wrong");
                 }
@@ -114,7 +119,8 @@ class _counterText extends StatelessWidget {
       child: Center(
         child: Text(
           value,
-          style: TextStyle(fontSize: 40, color: Color.fromARGB(255, 237, 234, 234)),
+          style: TextStyle(
+              fontSize: 40, color: Color.fromARGB(255, 237, 234, 234)),
         ),
       ),
     );

@@ -14,6 +14,7 @@ import 'package:inearu/pages/onboarding_screen.dart';
 import 'package:inearu/pages/user_detail_screen.dart';
 import 'package:inearu/screen/profile_screen.dart';
 import 'package:inearu/screen/login_screen.dart';
+import 'package:inearu/test_pages/profile_page.dart';
 import 'package:inearu/test_pages/stream_page.dart';
 
 class RouteGenerator {
@@ -35,6 +36,10 @@ class RouteGenerator {
       case UserScreen.routename:
         return MaterialPageRoute(
           builder: (context) => UserScreen(),
+        );
+      case TestProfileScreen.routename:
+        return MaterialPageRoute(
+          builder: (context) => TestProfileScreen(),
         );
       case LoginScreen.routename:
         return MaterialPageRoute(
